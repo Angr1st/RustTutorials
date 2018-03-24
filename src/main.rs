@@ -4,7 +4,7 @@ fn main() {
 let number = if condition {
     5
 } else {
-    6
+    "6"
 };
 
        println!("number is: {}", number); 
