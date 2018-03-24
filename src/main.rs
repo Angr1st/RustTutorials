@@ -1,8 +1,8 @@
 fn main() {
-let t = true ;
+let c = 'z';
 
-let f:bool = false;
+let z = 'c';
 
-let t = f && t;
-println!("{}",t );
+let heart_eyed_cat = '😻';
+println!("{}",heart_eyed_cat );
 }
