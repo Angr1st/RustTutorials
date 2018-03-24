@@ -1,7 +1,11 @@
 fn main() {
     let number = 3;
 
-    if number {
-       println!("The value of y is: {}", number ); 
-    } 
+    if number == 0 {
+       println!("number was zero"); 
+    } else if number != 0 {
+println!("number was something other than zero"); 
+    } else {
+println!("number was something other"); 
+    }
 }
