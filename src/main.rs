@@ -1,7 +1,10 @@
 fn main() {
-let tup :(u32,char,bool) = (234,'T',true);
-let x = tup.1;
-let y = tup.0;
-let z = tup.2;
-println!("The value of y is: {}", y);
+let array = [1,2,5,5,2,4];
+println!("The value of y is: {}", array[0]);
+
+let months = ["January", "February", "March", "April", "May", "June", "July",
+              "August", "September", "October", "November", "December"];
+
+
+println!("The value of y is: {}", months[12]);
 }
