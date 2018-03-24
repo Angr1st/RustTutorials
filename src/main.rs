@@ -1,8 +1,5 @@
 fn main() {
-let c = 'z';
-
-let z = 'c';
-
-let heart_eyed_cat = '😻';
-println!("{}",heart_eyed_cat );
+let tup :(u32,char,bool) = (234,'T',true);
+let (x,y,z) = tup;
+println!("The value of y is: {}", y);
 }
