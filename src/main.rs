@@ -1,13 +1,3 @@
-fn main() {
-    let x= 6;
-
-    let y = {
- plus_five(10)
-    };
-
-    println!("The value of y is: {}", y);
-}
-
-fn plus_five(x: i32) -> i32 {
-    x+5;
+fn main() {//Some super smart comment
+    println!("The value of y is: {}", 7);
 }
