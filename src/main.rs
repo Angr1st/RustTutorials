@@ -1,11 +1,12 @@
 fn main() {
-    let number = 3;
+    let condition = true;
 
-    if number == 0 {
-       println!("number was zero"); 
-    } else if number != 0 {
-println!("number was something other than zero"); 
-    } else {
-println!("number was something other"); 
-    }
+let number = if condition {
+    5
+} else {
+    6
+};
+
+       println!("number is: {}", number); 
+
 }
