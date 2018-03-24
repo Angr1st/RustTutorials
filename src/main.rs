@@ -2,12 +2,12 @@ fn main() {
     let x= 6;
 
     let y = {
- five()
+ plus_five(10)
     };
 
     println!("The value of y is: {}", y);
 }
 
-fn five() -> i32 {
-    5
+fn plus_five(x: i32) -> i32 {
+    x+5
 }
