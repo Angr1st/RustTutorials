@@ -9,5 +9,5 @@ fn main() {
 }
 
 fn plus_five(x: i32) -> i32 {
-    x+5
+    x+5;
 }
