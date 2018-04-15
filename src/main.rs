@@ -1,5 +1,6 @@
 use std::thread;
 use std::time::Duration;
+use std::collections::HashMap;
 
 fn main() {
     let simulated_user_specified_value = 26;
@@ -11,17 +12,17 @@ fn main() {
     );
 }
 
-struct Cacher<T>
-    where T: Fn(u32) -> u32
+struct Cacher<T,U,V>
+    where T: Fn(U) -> V
 {
     calculation: T,
-    value: Option<u32>,
+    value: Option<HashMap<U,V>>,
 }
 
-impl<T> Cacher<T>
-   where T: Fn(u32) -> u32
+impl<T,U,V> Cacher<T,U,V>
+   where T: Fn(U) -> V
 {
-    fn new(calculation: T) -> Cacher<T> {
+    fn new(calculation: T) -> Cacher<T,U,V> {
         Cacher {
             calculation,
             value: None,
