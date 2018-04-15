@@ -2,7 +2,7 @@ use std::thread;
 use std::time::Duration;
 
 fn main() {
-    let simulated_user_specified_value = 10;
+    let simulated_user_specified_value = 26;
     let simulated_random_number = 7;
 
     generate_workout(
