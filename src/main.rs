@@ -29,7 +29,7 @@ impl<T,U,V> Cacher<T,U,V>
         }
     }
 
-    fn value(&mut self, arg: u32) -> u32 {
+    fn value(&mut self, arg: U) -> V {
         match self.value {
             Some(v) => v,
             None => {
