@@ -1,6 +1,7 @@
 use std::thread;
 use std::time::Duration;
 use std::collections::HashMap;
+use std::hash::Hash;
 
 fn main() {
     let simulated_user_specified_value = 26;
@@ -13,39 +14,42 @@ fn main() {
 }
 
 struct Cacher<T,U,V>
-    where T: Fn(U) -> V
+    where T: Fn(&U) -> V
 {
     calculation: T,
-    value: Option<HashMap<U,V>>,
+    value: HashMap<U,V>,
 }
 
 impl<T,U,V> Cacher<T,U,V>
-   where T: Fn(U) -> V
+   where T: Fn(&U) -> V,
+         U: Eq + Hash,
+         V: Copy
 {
     fn new(calculation: T) -> Cacher<T,U,V> {
         Cacher {
             calculation,
-            value: None,
+            value: HashMap::new(),
         }
     }
 
-    fn value(&mut self, arg: U) -> V {
-        match self.value {
-            Some(v) => v,
+    fn value(&mut self, arg: U) -> &V {
+        match self.value.get(&arg) {
+            Some(x) => x,
             None => {
-                let v = (self.calculation)(arg);
-                self.value = Some(v);
-                v
+            let v = (self.calculation)(&arg);
+            self.value.entry(arg).or_insert_with((self.calculation)(&arg));
+            &v
             },
-        }
+        }       
     }
 }
 
 fn generate_workout(intensity: u32, random_number: u32) {
-    let mut expensive_result = Cacher::new(|num| {
+    let mut expensive_result = Cacher::new(|num : &u32| -> u32 {
     println!("Calculating slowly...");
     thread::sleep(Duration::from_secs(2));
-    num
+    let newNum = num.clone();
+    newNum
     });
     if intensity < 25 {
         println!("Today, do {} pushups!",
