@@ -14,14 +14,14 @@ fn main() {
 }
 
 struct Cacher<T,U,V>
-    where T: Fn(&U) -> V
+    where T: Fn(U) -> V
 {
     calculation: T,
     value: HashMap<U,V>,
 }
 
 impl<T,U,V> Cacher<T,U,V>
-   where T: Fn(&U) -> V,
+   where T: Fn(U) -> V,
          U: Eq + Hash,
          V: Copy
 {
@@ -32,20 +32,20 @@ impl<T,U,V> Cacher<T,U,V>
         }
     }
 
-    fn value(&mut self, arg: U) -> &V {
+    fn value(&mut self, arg: U) -> V {
         match self.value.get(&arg) {
             Some(x) => x,
             None => {
-            let v = (self.calculation)(&arg);
-            self.value.entry(arg).or_insert_with((self.calculation)(&arg));
-            &v
+            let v = (self.calculation)(arg);
+            self.value.entry(arg).or_insert_with(|| v);
+            v
             },
         }       
     }
 }
 
 fn generate_workout(intensity: u32, random_number: u32) {
-    let mut expensive_result = Cacher::new(|num : &u32| -> u32 {
+    let mut expensive_result = Cacher::new(|num : u32| -> u32 {
     println!("Calculating slowly...");
     thread::sleep(Duration::from_secs(2));
     let newNum = num.clone();
