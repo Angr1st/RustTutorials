@@ -22,7 +22,7 @@ struct Cacher<T,U,V>
 
 impl<T,U,V> Cacher<T,U,V>
    where T: Fn(U) -> V,
-         U: Eq + Hash,
+         U: Eq + Hash + Copy,
          V: Copy
 {
     fn new(calculation: T) -> Cacher<T,U,V> {
@@ -32,13 +32,14 @@ impl<T,U,V> Cacher<T,U,V>
         }
     }
 
-    fn value(&mut self, arg: U) -> V {
+    fn value(&mut self, arg: U) -> &V {
         match self.value.get(&arg) {
             Some(x) => x,
             None => {
-            let v = (self.calculation)(arg);
-            self.value.entry(arg).or_insert_with(|| v);
-            v
+                let v = (self.calculation)(arg);
+                self.value.insert(arg,v);
+                let returnValue = self.value.get(&arg).expect("Well super panic!");
+                returnValue
             },
         }       
     }
