@@ -1,71 +1,12 @@
 fn main() {
-    let celsius = Celsius { temperature: 30 };
-    println!("The Temperature is {} degree celsius", celsius.temperature);
-    let fahrenheit = celsius.to_fahrenheit();
-    println!("The Temperature is {} degree fahrenheit", fahrenheit.temperature);
-    let celsius = fahrenheit.to_celsius();
-    let enum_temp = Temperature::Celsius(celsius);
-    let enum_temp = transform_temperature(enum_temp);
-    println!("The Tempreture is {}!", enum_temp.temp_display())
+    println!("1:{}; 2:{}; 50:{}; 300:{};", fibbonaci(1), fibbonaci(2), fibbonaci(50),fibbonaci(300))
 }
 
-fn transform_temperature(temp:Temperature) -> Temperature {
-    match temp {
-        Temperature::Fahrenheit(inner) => Temperature::Celsius(Celsius::from(inner)),
-        Temperature::Celsius(inner) => Temperature::Fahrenheit(Fahrenheit::from(inner))
-    }
-} 
+const GOLDEN_RATIO:f64 = 1.618033988749894848204586834365638117720309179805762862135;
+const NEGATIV_GOLDEN_RATIO:f64 = -0.61803398874989484820458683436563811772030917980576286213;
+const FIVE:f64 = 5.0_f64;
 
-struct Celsius {
-    temperature:i32
-}
-
-struct Fahrenheit {
-    temperature:i32
-}
-
-enum Temperature {
-    Celsius(Celsius),
-    Fahrenheit(Fahrenheit)
-}
-
-impl Temperature {
-    fn temp_display(self) -> i32 {
-        match self {
-            Temperature::Celsius(inner) => inner.temperature,
-            Temperature::Fahrenheit(inner) => inner.temperature
-        }
-    }
-}
-
-impl Celsius {
-    fn to_fahrenheit(self) -> Fahrenheit {
-        from_celsius_to_fahrenheit(self)
-    }
-
-    fn from(fahrenheit:Fahrenheit) -> Celsius {
-        from_fahrenheit_to_celsius(fahrenheit)
-    }
-}
-
-impl Fahrenheit {
-    fn to_celsius(self) -> Celsius {
-        from_fahrenheit_to_celsius(self)
-    }
-
-    fn from(celsius:Celsius) -> Fahrenheit {
-        from_celsius_to_fahrenheit(celsius)
-    }
-}
-
-fn from_celsius_to_fahrenheit(celius:Celsius) -> Fahrenheit{
-            Fahrenheit{ 
-        temperature:(celius.temperature * 9/5) + 32
-        } 
-}
-
-fn from_fahrenheit_to_celsius(fahrenheit:Fahrenheit) -> Celsius {
-            Celsius{
-            temperature:(fahrenheit.temperature - 32) * 5/9 
-        }
+fn fibbonaci(n:i32) -> f64 {
+    let result = (GOLDEN_RATIO.powi(n) - NEGATIV_GOLDEN_RATIO.powi(n)) / (FIVE.sqrt());
+    result.round()
 }
