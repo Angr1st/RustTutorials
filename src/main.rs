@@ -1,12 +1,49 @@
 fn main() {
-    println!("1:{}; 2:{}; 50:{}; 300:{};", fibbonaci(1), fibbonaci(2), fibbonaci(50),fibbonaci(300))
+    for number in 0..12 {
+        println!("{}",build_first_block(number))
+    }
 }
 
-const GOLDEN_RATIO:f64 = 1.618033988749894848204586834365638117720309179805762862135;
-const NEGATIV_GOLDEN_RATIO:f64 = -0.61803398874989484820458683436563811772030917980576286213;
-const FIVE:f64 = 5.0_f64;
+fn build_first_block(n:usize) -> String{
+    let first = "On the ";
+    let middle = get_times(n);
+    let end = " day of Christmas,\nmy true love sent to me";
+    format!("{}{}{}\n{}\n",first,middle,end,get_presents(n))
+}
 
-fn fibbonaci(n:i32) -> f64 {
-    let result = (GOLDEN_RATIO.powi(n) - NEGATIV_GOLDEN_RATIO.powi(n)) / (FIVE.sqrt());
-    result.round()
+fn get_times(n:usize) -> &'static str{
+    let numbers = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"];
+    numbers[n]
+}
+
+fn get_presents(n:usize) -> String{
+    let presents = [
+        "A partridge in a pear tree",
+        "Two turtle doves",
+        "Three French hens",
+        "Four calling birds",
+        "Five golden rings",
+        "Six geese a-laying",
+        "Seven swans a-swimming",
+        "Eight maids a-milking",
+        "Nine ladies dancing",
+        "Ten lords a-leaping",
+        "Eleven pipers piping",
+        "Twelve drummers drumming"
+    ];
+    let mut result = presents[n].to_owned();
+    if n == 0 {
+        result
+    }
+    else {
+        for number in (0..(n-1)).rev() {
+            if number == 0 {
+                result = format!("{},\nAnd {}.",result,presents[number]);
+            }
+            else {
+                result = format!("{},\n{}",result,presents[number]);
+            }           
+        }
+        result
+    }
 }
