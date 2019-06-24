@@ -8,7 +8,7 @@ fn build_first_block(n:usize) -> String{
     let first = "On the ";
     let middle = get_times(n);
     let end = " day of Christmas,\nmy true love sent to me";
-    format!("{}{}{}\n{}",first,middle,end,get_presents(n))
+    format!("{}{}{}\n{}\n",first,middle,end,get_presents(n))
 }
 
 fn get_times(n:usize) -> &'static str{
@@ -38,7 +38,7 @@ fn get_presents(n:usize) -> String{
     else {
         for number in (0..(n-1)).rev() {
             if number == 0 {
-                result = format!("{},\nAnd {}.\n",result,presents[number]);
+                result = format!("{},\nAnd {}.",result,presents[number]);
             }
             else {
                 result = format!("{},\n{}",result,presents[number]);
