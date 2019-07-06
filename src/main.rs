@@ -36,7 +36,7 @@ fn get_presents(n:usize) -> String{
         result
     }
     else {
-        for number in (0..(n-1)).rev() {
+        for number in (0..n).rev() {
             if number == 0 {
                 result = format!("{},\nAnd {}.",result,presents[number]);
             }
