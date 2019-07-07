@@ -22,7 +22,7 @@ fn median(list:&Vec<usize>) -> usize {
 
     let even = length % 2 == 0;
     let middle = length / 2;
-    println!("The length is: {}; Is it even: {}; The middle is at: {}",length,even,middle);
+
     if even {
         let first = list[middle - 1];
         let second = list[middle];
