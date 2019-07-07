@@ -2,8 +2,35 @@ fn main() {
     let list:Vec<usize> = vec![3,5,7,12,13,14,21,23,23,23,23,29,40,56];
     print_average(&list);
     print_median(&list);
+    print_mode(&list);
 }
 
+fn print_mode(list:&Vec<usize>) {
+    let mode = mode(&list);
+    println!("The mode is: {}", mode);
+}
+
+use std::collections::HashMap;
+
+fn mode(list:&Vec<usize>) -> usize {
+    let mut map = HashMap::new();
+
+    for number in list {
+        let count = map.entry(number).or_insert(1);
+        *count += 1
+    }
+
+    let mut max_val:usize = 0;
+    let mut max_key:usize = 0;
+    for (key,val) in map {
+        if val > max_val {
+            max_val = val;
+            max_key = *key;
+        }
+    }
+
+    max_key
+}
 
 fn print_median(list:&Vec<usize>) {
     let mut list = list.clone();
