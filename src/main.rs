@@ -1,5 +1,5 @@
 fn main() { 
-    let list:Vec<usize> = vec![12,812,1,0,22,6132,13,65,81,65];
+    let list:Vec<usize> = vec![3,5,7,12,13,14,21,23,23,23,23,29,40,56];
     print_average(&list);
     print_median(&list);
 }
@@ -22,15 +22,15 @@ fn median(list:&Vec<usize>) -> usize {
 
     let even = length % 2 == 0;
     let middle = length / 2;
+    println!("The length is: {}; Is it even: {}; The middle is at: {}",length,even,middle);
     if even {
-        let first = list[middle];
-        let second = list[middle + 1];
+        let first = list[middle - 1];
+        let second = list[middle];
         let list:Vec<usize> = vec![first,second];
         average(&list)
     }
     else
     {
-        let middle = middle + 1;
         list[middle]
     }  
 }
